@@ -10,6 +10,13 @@ authForm.onsubmit = function(event) {
             console.log(error)
         })
     } else {
-        
-    }
+        firebase.auth().createUserWithEmailAndPassword(authForm.email.value, authForm.password.value)
+            .then(function(user){
+                console.log('Cadastro com sucesso')
+                console.log(user)
+            }).catch(function(error){
+                console.log('Falha no cadastro')
+                console.log(error)
+            })
+    } 
 }
