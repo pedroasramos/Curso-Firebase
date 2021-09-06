@@ -1,7 +1,7 @@
-authForm.onsubmit = function(evento) {
-    Event.preventDefault()
-    if (authForm.submitAuthForm.innerHtml == 'Acessar') {
-        firebase.auth().sigInWithEmailAndPassword(authForm.email.value, authForm.password.value)
+authForm.onsubmit = function(event) {
+    event.preventDefault()
+    if (authForm.submitAuthForm.innerHTML == 'Acessar') {
+        firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value)
             .then(function(user){
                 console.log('Acesso com sucesso')
                 console.log(user)
