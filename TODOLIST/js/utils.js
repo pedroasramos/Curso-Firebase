@@ -9,6 +9,7 @@ var userContent = document.getElementById('userContent')
 var userEmail = document.getElementById('userEmail')
 var emailVerified = document.getElementById('emailVerified')
 var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv')
+var passwordReset = document.getElementById('passwordReset')
 
 
 
@@ -16,16 +17,18 @@ var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv
 function toggleToRegister() {
     authForm.submitAuthForm.innerHTML = 'Cadastrar conta'
     authFormTitle.innerHTML = 'Inseira seus dados para se cadastrar'
-    hideItem(register)
-    showItem(access)
+    hideItem(register) //Esconder atalho para cadastrar conta
+    hideItem(passwordReset) //Esconder a opção de redefinição de senha
+    showItem(access) // Mostrar atalho para acessar conta
 }
 
 //Alterar o formulário de autenticação para o acesso de contas já existentes
 function toggleToAccess() {
     authForm.submitAuthForm.innerHTML = 'Acessar'
     authFormTitle.innerHTML = 'Acesse a sua conta para continuar'
-    hideItem(access)
-    showItem(register)
+    hideItem(access) // Esconder atalho para acessar conta
+    showItem(passwordReset) //Mostrar a opção de redefinição de senha
+    showItem(register) // Mostar atalho para cadastrar conta
 }
 
 //Simplifica a exibição de elementos da página
