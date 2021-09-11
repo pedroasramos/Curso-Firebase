@@ -10,6 +10,9 @@ var userEmail = document.getElementById('userEmail')
 var emailVerified = document.getElementById('emailVerified')
 var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv')
 var passwordReset = document.getElementById('passwordReset')
+var userImg = document.getElementById('userImg')
+var userName = document.getElementById('userName')
+
 
 
 
@@ -51,7 +54,10 @@ function showUserContent(user) {
         emailVerified.innerHTML = 'E-mail não verificado'
         showItem(sendEmailVerificationDiv)
     }
-    userEmail.innerHTML = user.email
+    userImg.src = user.photoURL ? user.photoURL : "img/unknownUser.png"
+    userName.innerHTML = user.displayName
+
+    // userEmail.innerHTML = user.email
     hideItem(auth)
     showItem(userContent)
 }
