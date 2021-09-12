@@ -5,6 +5,7 @@ firebase.auth().languageCode = 'pt-BR'
 authForm.onsubmit = function(event) {
     showItem(loading)
     event.preventDefault()
+    
     if (authForm.submitAuthForm.innerHTML == 'Acessar') {
         firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function(error){
             console.log('Falha no acesso')

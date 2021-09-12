@@ -14,8 +14,6 @@ var userImg = document.getElementById('userImg')
 var userName = document.getElementById('userName')
 
 
-
-
 // Alterar o formulário de autenticação para o cadastro de novas contas
 function toggleToRegister() {
     authForm.submitAuthForm.innerHTML = 'Cadastrar conta'
@@ -31,7 +29,7 @@ function toggleToAccess() {
     authFormTitle.innerHTML = 'Acesse a sua conta para continuar'
     hideItem(access) // Esconder atalho para acessar conta
     showItem(passwordReset) //Mostrar a opção de redefinição de senha
-    showItem(register) // Mostar atalho para cadastrar conta
+    showItem(register) // Mostrar atalho para cadastrar conta
 }
 
 //Simplifica a exibição de elementos da página
