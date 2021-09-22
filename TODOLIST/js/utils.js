@@ -12,6 +12,7 @@ var sendEmailVerificationDiv = document.getElementById('sendEmailVerificationDiv
 var passwordReset = document.getElementById('passwordReset')
 var userImg = document.getElementById('userImg')
 var userName = document.getElementById('userName')
+var todoForm = document.getElementById('todoForm')
 
 
 // Alterar o formulário de autenticação para o cadastro de novas contas
@@ -98,3 +99,6 @@ function showError(prefix, error){
 var actionCodeSettings = {
     url: 'https://todolist-3202a.firebaseapp.com'
 }
+
+var database = firebase.database()
+var dbRefUsers = database.ref('users')
