@@ -10,6 +10,8 @@ todoForm.onsubmit = function(event) {
         }).catch(function(error){
             showError('Falha ao adicionar tarefa: ', error)
         })
+
+        todoForm.name.value = ''
     } else {
         alert('O nome da tarefa não pode estar vazio.')
     }
@@ -27,11 +29,19 @@ function fillTodoList(dataSnapshot){
         spanLi.appendChild(document.createTextNode(value.name)) // Adiciona um elemento de texto dentro da span
         spanLi.id = item.key // Define o id do spanLi com a chave da tarefa
         li.appendChild(spanLi) // Adiciona o span dentro do li
+
         var liRemoveBtn = document.createElement('button') // Cria um botão para remoção da tarefa
         liRemoveBtn.appendChild(document.createTextNode('Excluir')) //Define o texto do botão
         liRemoveBtn.setAttribute('onclick', 'removeTodo(\"' + item.key +'\")') // Configura o onclick do botão de remoção de tarefas
         liRemoveBtn.setAttribute('class', 'danger todoBtn') // Define classes de estilização para o botão de remoção
         li.appendChild(liRemoveBtn) // Adiciona o botão de remoção no li
+
+        var liUpdateBtn = document.createElement('button') // Cria um botão para atualizar a tarefa
+        liUpdateBtn.appendChild(document.createTextNode('Editar')) //Define o texto do botão
+        liUpdateBtn.setAttribute('onclick', 'updateTodo(\"' + item.key +'\")') // Configura o onclick do botão de atualização de tarefas
+        liUpdateBtn.setAttribute('class', 'alternative todoBtn') // Define classes de estilização para o botão de atualização
+        li.appendChild(liUpdateBtn) // Adiciona o botão de atualização no li
+
         ulTodoList.appendChild(li) // Adiciona o li dentro da lista de tarefas
     })
 }
@@ -41,8 +51,29 @@ function removeTodo(key) {
     var selectedItem = document.getElementById(key)
     var confirmation = confirm('Realmente deseja remover a tarefa \"' + selectedItem.innerHTML +'\"?')
     if(confirmation) {
-        dbRefUsers.child(firebase.auth().currentUser.uid).child(key).remove().catch(function(error){
+        dbRefUsers.child(firebase.auth().currentUser.uid).child(key).remove().then(function(){
+            console.log('Tarefa "' + selectedItem.innerHTML + '" removida com sucesso')
+        }).catch(function(error){
             showError('Falha ao remover tarefa: ', error)
         })
+    }
+}
+
+// Atualiza tarefas
+function updateTodo(key) {
+    var selectedItem = document.getElementById(key)
+    var newTodoName = prompt('Escolha o um novo nome para a tarefa \"' + selectedItem.innerHTML + '\".', selectedItem.innerHTML)
+    if(newTodoName != ''){
+        var data = {
+            name: newTodoName
+        }
+
+        dbRefUsers.child(firebase.auth().currentUser.uid).child(key).update(data).then(function(){
+            console.log('Tarefa "' + data.name + '" atualizada com sucesso')
+        }).catch(function(error){
+            showError('Falha ao atualizar tarefa: ', error)
+        })
+    } else{
+        alert('O nome da tarefa não pode ficar vazio para atualizar a tarefa')
     }
 }
